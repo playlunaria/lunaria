@@ -1,5 +1,9 @@
 # Lunaria
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/playlunaria/lunaria/Rust)
+![Codecov](https://img.shields.io/codecov/c/gh/playlunaria/lunaria?token=V6KDTKJqDB)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/playlunaria/lunaria?sort=semver)
+
 _A video game for programmers set in space._
 
 Lunaria is a video game that is played by writing code. It is designed to be

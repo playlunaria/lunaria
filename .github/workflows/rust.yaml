@@ -23,8 +23,8 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~/.cargo/git
-          key: ${{ runner.os }}-stable-cargo-index-v1-v1-${{ hashFiles('Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-stable-cargo-index-v1-v1-
+          key: ${{ runner.os }}-stable-cargo-index-v1-${{ hashFiles('Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-stable-cargo-index-v1-
 
       - name: Cache cargo build
         uses: actions/cache@v1
@@ -88,8 +88,8 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~/.cargo/git
-          key: ${{ runner.os }}-stable-cargo-index-v1-v1-${{ hashFiles('Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-stable-cargo-index-v1-v1-
+          key: ${{ runner.os }}-stable-cargo-index-v1-${{ hashFiles('Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-stable-cargo-index-v1-
 
       - name: Cache cargo build
         uses: actions/cache@v1
