@@ -28,3 +28,4 @@ categories = [
 maintenance = { status = "actively-developed" }
 
 [dependencies]
+bevy = "0.1.3"
