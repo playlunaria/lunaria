@@ -1,8 +1,14 @@
 use bevy::prelude::*;
 
-fn main() {
+use crate::grpc::GrpcPlugin;
+
+mod grpc;
+
+#[tokio::main]
+async fn main() {
     App::build()
         .add_default_plugins()
+        .add_plugin(GrpcPlugin)
         .add_resource(Counter { count: 0 })
         .add_system(increase_counter_system.system())
         .run();

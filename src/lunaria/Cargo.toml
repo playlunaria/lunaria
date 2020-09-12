@@ -27,4 +27,8 @@ categories = [
 maintenance = { status = "actively-developed" }
 
 [dependencies]
+lunaria-api = { version = "0.0.0", path = "../lunaria-api" }
+
 bevy = "0.1.3"
+tokio = { version = "0.2.22", features = ["macros", "rt-threaded"] }
+tonic = "0.3.0"
