@@ -1,5 +1,5 @@
 [package]
-name = "lunaria-server"
+name = "lunaria"
 version = "0.0.0"
 authors = [
     "Lunaria Contributors",
@@ -10,7 +10,7 @@ edition = "2018"
 # See more keys and their definitions at
 # https://doc.rust-lang.org/cargo/reference/manifest.html
 
-description = "Server for Lunaria, a space-themed video game for programmers"
+description = "A space-themed sandbox video game for programmers"
 readme = "README.md"
 homepage = "https://playlunaria.com"
 repository = "https://github.com/playlunaria/lunaria"
@@ -18,7 +18,6 @@ license = "MIT OR Apache-2.0"
 keywords = [
     "game",
     "gamedev",
-    "server"
 ]
 categories = [
     "games"
