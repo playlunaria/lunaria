@@ -1,4 +1,5 @@
 [workspace]
 members = [
-    "src/lunaria"
+    "src/lunaria",
+    "src/lunaria-api",
 ]
