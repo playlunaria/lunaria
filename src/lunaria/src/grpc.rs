@@ -35,10 +35,11 @@ fn initialize_grpc_server() -> GrpcQueue {
     }
 }
 
-fn process_requests_system(counter: Res<Counter>, mut queue: ResMut<GrpcQueue>) {
+fn process_requests_system(mut counter: ResMut<Counter>, mut queue: ResMut<GrpcQueue>) {
     while let Ok((request, response)) = queue.request_queue.try_recv() {
         match request {
             GrpcEvent::GetCountRequest => {
+                counter.requests += 1;
                 response.send(counter.count).unwrap();
             }
         }

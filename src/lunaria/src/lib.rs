@@ -6,13 +6,17 @@ mod grpc;
 
 struct Counter {
     count: usize,
+    requests: usize,
 }
 
 pub fn run_app() {
     App::build()
         .add_default_plugins()
         .add_plugin(GrpcPlugin)
-        .add_resource(Counter { count: 0 })
+        .add_resource(Counter {
+            count: 0,
+            requests: 0,
+        })
         .add_startup_system(setup.system())
         .add_system(increase_counter_system.system())
         .add_system(print_counter_system.system())
@@ -32,7 +36,7 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
                 ..Default::default()
             },
             text: Text {
-                value: "Counter: 0".to_string(),
+                value: "Counter: 0 | Requests: 0".to_string(),
                 font: font_handle,
                 style: TextStyle {
                     font_size: 60.0,
@@ -49,6 +53,9 @@ fn increase_counter_system(mut counter: ResMut<Counter>) {
 
 fn print_counter_system(counter: Res<Counter>, mut query: Query<&mut Text>) {
     for mut text in &mut query.iter() {
-        text.value = format!("Counter: {}", counter.count);
+        text.value = format!(
+            "Counter: {} | Requests: {}",
+            counter.count, counter.requests
+        );
     }
 }
