@@ -4,8 +4,11 @@ use crate::grpc::GrpcPlugin;
 
 mod grpc;
 
-#[tokio::main]
-async fn main() {
+struct Counter {
+    count: usize,
+}
+
+pub fn run_app() {
     App::build()
         .add_default_plugins()
         .add_plugin(GrpcPlugin)
@@ -14,10 +17,6 @@ async fn main() {
         .add_system(increase_counter_system.system())
         .add_system(print_counter_system.system())
         .run();
-}
-
-struct Counter {
-    count: usize,
 }
 
 fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {

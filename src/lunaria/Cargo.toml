@@ -23,6 +23,9 @@ categories = [
     "games"
 ]
 
+[[bin]]
+name = "lunaria"
+
 [badges]
 maintenance = { status = "actively-developed" }
 
