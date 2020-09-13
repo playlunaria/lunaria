@@ -1,6 +1,4 @@
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    tonic_build::configure()
-        .build_client(false)
-        .compile(&["protobufs/counter.proto"], &["protobufs"])?;
+    tonic_build::compile_protos("protobufs/counter.proto")?;
     Ok(())
 }
