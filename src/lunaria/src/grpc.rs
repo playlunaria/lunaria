@@ -5,9 +5,10 @@ use tonic::transport::Server;
 use tonic::{Request, Response, Status};
 
 use lunaria_api::counter::count_service_server::CountServiceServer;
-use lunaria_api::counter::{GetCountRequest, GetCountResponse};
+use lunaria_api::counter::{GetCountRequest, GetCountResponse, Meta};
 
 use super::Counter;
+use chrono::Utc;
 
 pub struct GrpcPlugin;
 
@@ -75,6 +76,11 @@ impl lunaria_api::counter::count_service_server::CountService for CounterService
             .unwrap();
         let res = resp_rx.await.unwrap();
 
-        Ok(Response::new(GetCountResponse { count: res as u64 }))
+        Ok(Response::new(GetCountResponse {
+            meta: Some(Meta {
+                timestamp: Utc::now().timestamp(),
+            }),
+            count: res as u64,
+        }))
     }
 }

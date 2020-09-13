@@ -2,10 +2,15 @@ syntax = "proto3";
 
 package counter;
 
+message Meta {
+  int64 timestamp = 1;
+}
+
 message GetCountRequest {}
 
 message GetCountResponse {
-  uint64 count = 1;
+  Meta meta = 1;
+  uint64 count = 2;
 }
 
 service CountService {
