@@ -4,7 +4,6 @@ version = "0.0.0"
 authors = [
     "Lunaria Contributors",
     "Jan David Nose <jandavid@playlunaria.com>",
-    "Rob Pando <rob@playlunaria.com"
 ]
 edition = "2018"
 
