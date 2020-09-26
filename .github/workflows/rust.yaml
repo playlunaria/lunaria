@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y alsa libasound2-dev
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -74,6 +77,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y alsa libasound2-dev
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -145,19 +151,22 @@ jobs:
           key: ${{ runner.os }}-stable-cargo-index-v1-${{ hashFiles('Cargo.lock') }}
           restore-keys: ${{ runner.os }}-stable-cargo-index-v1-
 
-      - name: Cache cargo build
-        uses: actions/cache@v1
-        with:
-          path: target
-          key: ${{ runner.os }}-stable-cargo-build-target-v1-${{ hashFiles('Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-stable-cargo-build-target-v1-
+      # Caching of build artifacts has been disabled due to build errors on macOS.
+      # https://issues.apache.org/jira/browse/ARROW-9628
+      #
+      # - name: Cache cargo build
+      #   uses: actions/cache@v1
+      #   with:
+      #     path: target
+      #     key: ${{ runner.os }}-stable-cargo-build-target-v1-${{ hashFiles('Cargo.lock') }}
+      #     restore-keys: ${{ runner.os }}-stable-cargo-build-target-v1-
 
       - name: Set up Rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          profile: minimal
           toolchain: stable
           override: true
+          components: rustfmt
 
       - name: Run tests
         uses: actions-rs/cargo@v1
