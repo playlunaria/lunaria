@@ -3,16 +3,7 @@ version: 2
 
 updates:
   - package-ecosystem: "cargo"
-    directory: "src/lunaria"
-    schedule:
-      interval: "daily"
-    assignees:
-      - "jdno"
-    reviewers:
-      - "jdno"
-
-  - package-ecosystem: "cargo"
-    directory: "src/lunaria-api"
+    directory: "/"
     schedule:
       interval: "daily"
     assignees:
