@@ -6,8 +6,8 @@ on:
     - cron: "0 0 * * *"
 
 jobs:
-  test:
-    name: Preview
+  preview:
+    name: Preview (ubuntu)
     strategy:
       matrix:
         channel:
@@ -15,9 +15,55 @@ jobs:
           - nightly
         os:
           - macos
-          - ubuntu
           - windows
     runs-on: ${{ matrix.os }}-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Cache cargo registry
+        uses: actions/cache@v1
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-${{ matrix.channel }}-cargo-registry-v1-${{ hashFiles('Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.channel }}-cargo-registry-v1-
+
+      - name: Cache cargo index
+        uses: actions/cache@v1
+        with:
+          path: ~/.cargo/git
+          key: ${{ runner.os }}-${{ matrix.channel }}-cargo-index-v1-${{ hashFiles('Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.channel }}-cargo-index-v1-
+
+      - name: Cache cargo build
+        uses: actions/cache@v1
+        with:
+          path: target
+          key: ${{ runner.os }}-${{ matrix.channel }}-cargo-build-target-v1-${{ hashFiles('Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.channel }}-cargo-build-target-v1-
+
+      - name: Set up Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: ${{ matrix.channel }}
+          override: true
+
+      - name: Run tests
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --verbose
+
+  ubuntu:
+    name: Preview (ubuntu)
+    strategy:
+      matrix:
+        channel:
+          - beta
+          - nightly
+    runs-on: ubuntu-latest
 
     steps:
       - name: Install system dependencies
