@@ -781,7 +781,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "chrono"
-version = "0.4.18"
+version = "0.4.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "libc 0.2.76 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1927,7 +1927,7 @@ name = "lunaria"
 version = "0.0.0"
 dependencies = [
  "bevy 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "chrono 0.4.18 (registry+https://github.com/rust-lang/crates.io-index)",
+ "chrono 0.4.19 (registry+https://github.com/rust-lang/crates.io-index)",
  "criterion 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "lunaria-api 0.0.0",
  "tokio 0.2.22 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -3766,7 +3766,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum cc 1.0.59 (registry+https://github.com/rust-lang/crates.io-index)" = "66120af515773fb005778dc07c261bd201ec8ce50bd6e7144c927753fe013381"
 "checksum cexpr 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = "f4aedb84272dbe89af497cf81375129abda4fc0a9e7c5d317498c15cc30c0d27"
 "checksum cfg-if 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)" = "4785bdd1c96b2a846b2bd7cc02e86b6b3dbf14e7e53446c4f54c92a361040822"
-"checksum chrono 0.4.18 (registry+https://github.com/rust-lang/crates.io-index)" = "d021fddb7bd3e734370acfa4a83f34095571d8570c039f1420d77540f68d5772"
+"checksum chrono 0.4.19 (registry+https://github.com/rust-lang/crates.io-index)" = "670ad68c9088c2a963aaa298cb369688cf3f9465ce5e2d4ca10e6e0098a1ce73"
 "checksum clang-sys 0.29.3 (registry+https://github.com/rust-lang/crates.io-index)" = "fe6837df1d5cba2397b835c8530f51723267e16abbf83892e9e5af4f0e5dd10a"
 "checksum clap 2.33.3 (registry+https://github.com/rust-lang/crates.io-index)" = "37e58ac78573c40708d45522f0d80fa2f01cc4f9b4e2bf749807255454312002"
 "checksum cloudabi 0.0.3 (registry+https://github.com/rust-lang/crates.io-index)" = "ddfc5b9aa5d4507acaf872de71051dfd0e309860e88966e1051e462a077aac4f"

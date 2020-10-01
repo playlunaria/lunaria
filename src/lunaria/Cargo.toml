@@ -36,7 +36,7 @@ maintenance = { status = "actively-developed" }
 lunaria-api = { version = "0.0.0", path = "../lunaria-api" }
 
 bevy = "0.2.1"
-chrono = "0.4.18"
+chrono = "0.4.19"
 tokio = { version = "0.2.22", features = ["macros", "rt-threaded"] }
 tonic = "0.3.1"
 
