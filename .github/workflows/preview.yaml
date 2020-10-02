@@ -7,7 +7,7 @@ on:
 
 jobs:
   preview:
-    name: Preview (ubuntu)
+    name: Preview
     strategy:
       matrix:
         channel:
@@ -46,7 +46,6 @@ jobs:
       - name: Set up Rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          profile: minimal
           toolchain: ${{ matrix.channel }}
           override: true
 
@@ -70,7 +69,8 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y \
           alsa \
-          libasound2-dev
+          libasound2-dev \
+          libudev-dev
 
       - name: Checkout code
         uses: actions/checkout@v2
@@ -99,7 +99,6 @@ jobs:
       - name: Set up Rust toolchain
         uses: actions-rs/toolchain@v1
         with:
-          profile: minimal
           toolchain: ${{ matrix.channel }}
           override: true
 
