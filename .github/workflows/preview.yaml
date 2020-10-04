@@ -48,6 +48,7 @@ jobs:
         with:
           toolchain: ${{ matrix.channel }}
           override: true
+          components: rustfmt
 
       - name: Run tests
         uses: actions-rs/cargo@v1
@@ -101,6 +102,7 @@ jobs:
         with:
           toolchain: ${{ matrix.channel }}
           override: true
+          components: rustfmt
 
       - name: Run tests
         uses: actions-rs/cargo@v1
