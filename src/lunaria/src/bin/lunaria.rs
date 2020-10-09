@@ -1,4 +1,3 @@
-#[tokio::main]
-async fn main() {
+fn main() {
     lunaria::run_app();
 }

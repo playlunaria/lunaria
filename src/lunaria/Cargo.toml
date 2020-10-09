@@ -22,10 +22,6 @@ categories = [
     "games"
 ]
 
-[[bench]]
-name = "grpc_count"
-harness = false
-
 [[bin]]
 name = "lunaria"
 
@@ -33,12 +29,4 @@ name = "lunaria"
 maintenance = { status = "actively-developed" }
 
 [dependencies]
-lunaria-api = { version = "0.0.0", path = "../lunaria-api" }
-
 bevy = "0.2.1"
-chrono = "0.4.19"
-tokio = { version = "0.2.22", features = ["macros", "rt-threaded"] }
-tonic = "0.3.1"
-
-[dev-dependencies]
-criterion = "0.3.3"
