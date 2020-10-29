@@ -29,4 +29,9 @@ name = "lunaria"
 maintenance = { status = "actively-developed" }
 
 [dependencies]
+lunaria-api = { version = "0.1.1", features = ["server"] }
+
 bevy = "0.2.1"
+tokio = { version = "0.3.2", features = ["macros", "rt-multi-thread"] }
+tokio-compat-02 = "0.1.2"
+tonic = "0.3.1"
