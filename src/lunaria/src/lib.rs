@@ -4,7 +4,7 @@ pub mod plugins;
 
 pub fn run_app() {
     App::build()
-        .add_default_plugins()
+        .add_plugins(DefaultPlugins)
         .add_plugin(plugins::api::Api)
         .run();
 }
