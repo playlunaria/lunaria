@@ -995,7 +995,7 @@ checksum = "2809f67365382d65fd2b6d9c22577231b954ed27400efeafbe687bda75abcc0b"
 dependencies = [
  "bytes",
  "memchr",
- "pin-project-lite",
+ "pin-project-lite 0.1.7",
 ]
 
 [[package]]
@@ -1486,7 +1486,7 @@ dependencies = [
  "futures-io",
  "memchr",
  "parking",
- "pin-project-lite",
+ "pin-project-lite 0.1.7",
  "waker-fn",
 ]
 
@@ -2232,7 +2232,7 @@ version = "0.0.0"
 dependencies = [
  "bevy",
  "lunaria-api",
- "tokio 0.3.3",
+ "tokio 0.3.4",
  "tokio-compat-02",
  "tonic",
 ]
@@ -2778,6 +2778,12 @@ name = "pin-project-lite"
 version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "282adbf10f2698a7a77f8e983a74b2d18176c19a7fd32a45446139ae7b02b715"
+
+[[package]]
+name = "pin-project-lite"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6b063f57ec186e6140e2b8b6921e5f1bd89c7356dda5b33acc5401203ca6131c"
 
 [[package]]
 name = "pin-utils"
@@ -3494,20 +3500,20 @@ dependencies = [
  "memchr",
  "mio",
  "num_cpus",
- "pin-project-lite",
+ "pin-project-lite 0.1.7",
  "slab",
 ]
 
 [[package]]
 name = "tokio"
-version = "0.3.3"
+version = "0.3.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e5ca08accbcb46f11fd8d2d1c6158c348b7888009a1f39260bcad66f6a454250"
+checksum = "9dfe2523e6fa84ddf5e688151d4e5fddc51678de9752c6512a24714c23818d61"
 dependencies = [
  "autocfg",
  "futures-core",
  "num_cpus",
- "pin-project-lite",
+ "pin-project-lite 0.2.0",
  "slab",
  "tokio-macros",
 ]
@@ -3520,9 +3526,9 @@ checksum = "bb4cec419b8b6f06c32e74aae6d8c5e79646d038a38e5ea2b36045f2c3296e22"
 dependencies = [
  "bytes",
  "once_cell",
- "pin-project-lite",
+ "pin-project-lite 0.1.7",
  "tokio 0.2.22",
- "tokio 0.3.3",
+ "tokio 0.3.4",
 ]
 
 [[package]]
@@ -3546,7 +3552,7 @@ dependencies = [
  "futures-core",
  "futures-sink",
  "log",
- "pin-project-lite",
+ "pin-project-lite 0.1.7",
  "tokio 0.2.22",
 ]
 
