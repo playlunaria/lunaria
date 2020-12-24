@@ -32,6 +32,6 @@ maintenance = { status = "actively-developed" }
 lunaria-api = { version = "0.1.1", features = ["server"] }
 
 bevy = "0.4.0"
-tokio = { version = "0.3.6", features = ["macros", "rt-multi-thread"] }
+tokio = { version = "1.0.0", features = ["macros", "rt-multi-thread"] }
 tokio-compat-02 = "0.1.2"
 tonic = "0.3.1"
