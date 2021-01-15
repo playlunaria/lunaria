@@ -2303,7 +2303,7 @@ version = "0.0.0"
 dependencies = [
  "bevy",
  "lunaria-api",
- "tokio 0.3.6",
+ "tokio 1.0.2",
  "tokio-compat-02",
  "tonic",
 ]
@@ -3618,9 +3618,18 @@ checksum = "720ba21c25078711bf456d607987d95bce90f7c3bea5abe1db587862e7a1e87c"
 dependencies = [
  "autocfg",
  "futures-core",
+ "pin-project-lite 0.2.0",
+]
+
+[[package]]
+name = "tokio"
+version = "1.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0ca04cec6ff2474c638057b65798f60ac183e5e79d3448bb7163d36a39cff6ec"
+dependencies = [
+ "autocfg",
  "num_cpus",
  "pin-project-lite 0.2.0",
- "slab",
  "tokio-macros",
 ]
 
@@ -3639,9 +3648,9 @@ dependencies = [
 
 [[package]]
 name = "tokio-macros"
-version = "0.3.1"
+version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "21d30fdbb5dc2d8f91049691aa1a9d4d4ae422a21c334ce8936e5886d30c5c45"
+checksum = "42517d2975ca3114b22a16192634e8241dc5cc1f130be194645970cc1c371494"
 dependencies = [
  "proc-macro2",
  "quote",
