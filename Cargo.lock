@@ -2303,7 +2303,7 @@ version = "0.0.0"
 dependencies = [
  "bevy",
  "lunaria-api",
- "tokio 1.4.0",
+ "tokio 1.6.0",
  "tokio-compat-02",
  "tonic",
 ]
@@ -3612,9 +3612,9 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "1.4.0"
+version = "1.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "134af885d758d645f0f0505c9a8b3f9bf8a348fd822e112ab5248138348f1722"
+checksum = "bd3076b5c8cc18138b8f8814895c11eb4de37114a5d127bafdc5e55798ceef37"
 dependencies = [
  "autocfg",
  "num_cpus",
@@ -3632,7 +3632,7 @@ dependencies = [
  "once_cell",
  "pin-project-lite 0.2.0",
  "tokio 0.2.22",
- "tokio 1.4.0",
+ "tokio 1.6.0",
  "tokio-stream",
 ]
 
@@ -3655,7 +3655,7 @@ checksum = "e4cdeb73537e63f98adcd73138af75e3f368ccaecffaa29d7eb61b9f5a440457"
 dependencies = [
  "futures-core",
  "pin-project-lite 0.2.0",
- "tokio 1.4.0",
+ "tokio 1.6.0",
 ]
 
 [[package]]
