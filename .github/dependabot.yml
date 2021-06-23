@@ -6,7 +6,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    assignees:
-      - "jdno"
-    reviewers:
-      - "jdno"
+    labels:
+      - "C-dependency"
+      - "PR-merge"
