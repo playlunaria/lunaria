@@ -4,8 +4,8 @@ name: Rust
 "on": [push]
 
 jobs:
-  clippy:
-    name: Clippy
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
 
     steps:
@@ -19,13 +19,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - uses: actions/cache@v2
+      - name: Cache build artifacts
+        uses: actions/cache@v2.1.6
         with:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
             target
           key: ${{ runner.os }}-stable-cargo-v1-${{ hashFiles('Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-stable-cargo-v1-
 
       - name: Set up Rust toolchain
         uses: actions-rs/toolchain@v1
@@ -41,8 +43,8 @@ jobs:
           command: clippy
           args: --all-targets --all-features -- -D warnings
 
-  rustfmt:
-    name: Rustfmt
+  style:
+    name: Style
     runs-on: ubuntu-latest
 
     steps:
@@ -63,8 +65,8 @@ jobs:
           command: fmt
           args: --all -- --check
 
-  coverage:
-    name: Test (ubuntu)
+  test:
+    name: Test
     runs-on: ubuntu-latest
 
     steps:
@@ -78,13 +80,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - uses: actions/cache@v2
+      - name: Cache build artifacts
+        uses: actions/cache@v2.1.6
         with:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
             target
           key: ${{ runner.os }}-stable-cargo-v1-${{ hashFiles('Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-stable-cargo-v1-
 
       - name: Set up Rust toolchain
         uses: actions-rs/toolchain@v1
@@ -95,7 +99,7 @@ jobs:
       - name: Run cargo-tarpaulin
         uses: actions-rs/tarpaulin@master
         with:
-          version: 0.13.3
+          version: 0.16.0
 
       - name: Upload to codecov.io
         uses: codecov/codecov-action@v1.0.2
@@ -107,29 +111,3 @@ jobs:
         with:
           name: code-coverage-report
           path: cobertura.xml
-
-  test:
-    name: Test
-    strategy:
-      matrix:
-        os:
-          - macos
-          - windows
-    runs-on: ${{ matrix.os }}-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Rust toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          override: true
-          components: rustfmt
-
-      - name: Run tests
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --verbose
