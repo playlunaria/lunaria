@@ -4,6 +4,7 @@ use bevy::DefaultPlugins;
 use crate::api::Api;
 
 pub mod api;
+pub mod error;
 
 pub fn run_app() {
     let api = initialize_api();

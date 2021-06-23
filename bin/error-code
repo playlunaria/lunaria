@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+# Enable strict mode for Bash
+# http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euo pipefail
+IFS=$'\n\t'
+
+if [ $# -ne 1 ]; then
+	echo "ERROR Invalid number of arguments"
+	echo "Usage: bin/error-code <command>"
+	exit 1
+fi
+
+command="${1}"
+
+script_path="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+root_path="$(cd "${script_path}/.." && pwd)"
+src_path="${root_path}/src"
+
+help() {
+	echo -e "check\t\tCheck that error codes are only used once in the project"
+	echo -e "generate\tGenerate a new error code"
+
+}
+
+check() {
+	codes=$(grep -hrEo "Code::new\(\"LUN([0-9]{4})\"\)" --include="*.rs" "${src_path}" | grep -Eo "LUN([0-9]{4})")
+
+	codes_count=$(echo "${codes}" | wc -l)
+	unique_count=$(echo "${codes}" | sort | uniq | wc -l)
+
+	if [ "${codes_count}" -ne "${unique_count}" ]; then
+		echo "ERROR Duplicate use of error code detected"
+		exit 2
+	else
+		echo "No duplicate error codes found"
+	fi
+}
+
+generate() {
+	codes=$(grep -hrEo "Code::new\(\"LUN([0-9]{4})\"\)" --include="*.rs" "${src_path}" | grep -Eo "LUN([0-9]{4})")
+	last_code=$(echo "${codes}" | sort | tail -n 1)
+	number=$(echo "${last_code}" | grep -Eo "[0-9]+")
+	next_number=$((number + 1))
+
+	echo "LUN$(printf %04d $next_number)"
+}
+
+case "${command}" in
+"check")
+	check
+	;;
+"generate")
+	generate
+	;;
+*)
+	help
+	;;
+esac
+
+exit 0
