@@ -32,17 +32,7 @@ repos:
     rev: v1.0
     hooks:
       - id: cargo-check
-        args: [--manifest-path, languages/rust/Cargo.toml]
       - id: clippy
-        args:
-          [
-            --manifest-path,
-            languages/rust/Cargo.toml,
-            --all-features,
-            --all-targets,
-            --,
-            -D,
-            warnings,
-          ]
+        args: [--all-features, --all-targets, --, -D, warnings]
       - id: fmt
-        args: [--manifest-path, languages/rust/Cargo.toml, --all, --]
+        args: [--all, --]
