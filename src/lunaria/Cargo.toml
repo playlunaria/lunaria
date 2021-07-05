@@ -33,6 +33,6 @@ lunaria-api = { version = "0.1.2", features = ["server"] }
 
 bevy = "0.5.0"
 getset = "0.1.1"
-tokio = { version = "1.7.1", features = ["macros", "rt-multi-thread"] }
+tokio = { version = "1.8.0", features = ["macros", "rt-multi-thread"] }
 tonic = "0.4.2"
 uuid = { version = "0.8.2", features = ["v4"] }
