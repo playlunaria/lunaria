@@ -1,0 +1,34 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="Lunaria"
+config/description="A video game for programmers set in space."
+run/main_scene="res://scenes/menus/main/MainMenu.tscn"
+config/icon="res://assets/brand/Logo.png"
+
+[autoload]
+
+EngineSingleton="*res://singletons/EngineSingleton.gdns"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_clear_color=Color( 0.156863, 0.164706, 0.211765, 1 )
+environment/default_environment="res://default_env.tres"

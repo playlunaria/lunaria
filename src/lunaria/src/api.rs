@@ -1,7 +1,6 @@
 use std::net::{IpAddr, SocketAddr};
 use std::str::FromStr;
 
-use bevy::app::{AppBuilder, Plugin};
 use lunaria_api::lunaria::v1::lunaria_service_server::LunariaServiceServer;
 use tonic::transport::Server as GrpcServer;
 
@@ -18,6 +17,16 @@ impl Api {
         Self::default()
     }
 
+    pub fn run(&self) {
+        let address = self.address_or_default();
+
+        tokio::spawn(
+            GrpcServer::builder()
+                .add_service(LunariaServiceServer::new(LunariaService::default()))
+                .serve(address),
+        );
+    }
+
     fn address_or_default(&self) -> SocketAddr {
         if let Ok(address_string) = std::env::var(ENV_VAR_ADDRESS) {
             if let Ok(address) = SocketAddr::from_str(&address_string) {
@@ -32,21 +41,5 @@ impl Api {
 impl Default for Api {
     fn default() -> Self {
         Self {}
-    }
-}
-
-impl Plugin for Api {
-    fn build(&self, _app: &mut AppBuilder) {
-        let address = self.address_or_default();
-
-        tokio::spawn(
-            GrpcServer::builder()
-                .add_service(LunariaServiceServer::new(LunariaService::default()))
-                .serve(address),
-        );
-    }
-
-    fn name(&self) -> &str {
-        "api"
     }
 }
