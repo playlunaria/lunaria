@@ -63,6 +63,9 @@ impl Display for Code {
 pub enum ErrorKind {
     /// An error of unknown origin
     Unknown,
+
+    /// An error with the asynchronous runtime that runs Lunaria's background processing
+    Runtime,
 }
 
 #[cfg(test)]

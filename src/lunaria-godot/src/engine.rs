@@ -1,13 +1,22 @@
 use gdnative::prelude::*;
 
+use lunaria::engine::Engine;
+
 #[derive(NativeClass)]
 #[inherit(Node)]
-pub struct EngineSingleton {}
+pub struct EngineSingleton {
+    _engine: Engine,
+}
 
 #[methods]
 impl EngineSingleton {
     fn new(_owner: &Node) -> Self {
-        Self {}
+        let engine = match Engine::new() {
+            Ok(engine) => engine,
+            Err(error) => panic!("{}", error),
+        };
+
+        Self { _engine: engine }
     }
 
     #[export]
