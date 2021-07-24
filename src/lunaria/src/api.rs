@@ -17,14 +17,13 @@ impl Api {
         Self::default()
     }
 
-    pub fn run(&self) {
+    pub async fn serve(self) -> Result<(), tonic::transport::Error> {
         let address = self.address_or_default();
 
-        tokio::spawn(
-            GrpcServer::builder()
-                .add_service(LunariaServiceServer::new(LunariaService::default()))
-                .serve(address),
-        );
+        GrpcServer::builder()
+            .add_service(LunariaServiceServer::new(LunariaService::default()))
+            .serve(address)
+            .await
     }
 
     fn address_or_default(&self) -> SocketAddr {
