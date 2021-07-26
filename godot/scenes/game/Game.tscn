@@ -17,6 +17,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Tween" type="Tween" parent="GameCamera"]
+
 [node name="GroundMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 format = 1
