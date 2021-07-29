@@ -49,7 +49,7 @@ impl Code {
     }
 
     pub fn get(&self) -> &str {
-        &self.0
+        self.0
     }
 }
 
