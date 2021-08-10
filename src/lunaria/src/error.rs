@@ -66,6 +66,9 @@ pub enum ErrorKind {
 
     /// An error with the asynchronous runtime that runs Lunaria's background processing
     Runtime,
+
+    /// The command is not valid in the current context
+    InvalidCommand,
 }
 
 #[cfg(test)]
