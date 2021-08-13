@@ -31,4 +31,4 @@ lunaria = { path = "../lunaria", version = "0.0.0" }
 
 gdnative = "0.9.3"
 strum = { version = "0.21.0", features = ["derive"] }
-tokio = { version = "1.9.0" }
+tokio = { version = "1.10.0" }
