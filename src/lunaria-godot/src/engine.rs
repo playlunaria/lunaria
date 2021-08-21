@@ -1,29 +1,37 @@
 use gdnative::prelude::*;
-use tokio::sync::watch::{channel, Sender};
+use tokio::sync::{mpsc, watch};
 
+use lunaria::command::Command;
 use lunaria::engine::Engine;
-use lunaria::game::GameStatus;
+use lunaria::event::Event;
+
+type CommandQueue = mpsc::Receiver<Command>;
+type EventQueue = watch::Sender<Event>;
 
 #[derive(NativeClass)]
 #[inherit(Node)]
 pub struct EngineSingleton {
     _engine: Engine,
-    game_status_sender: Sender<GameStatus>,
+    #[allow(dead_code)] // TODO: Remove when switching to synchronous start command
+    command_queue: CommandQueue,
+    event_queue: EventQueue,
 }
 
 #[methods]
 impl EngineSingleton {
     fn new(_owner: &Node) -> Self {
-        let (sender, receiver) = channel(GameStatus::Stopped);
+        let (command_sender, command_receiver) = mpsc::channel(256);
+        let (event_sender, event_receiver) = watch::channel(Event::None);
 
-        let engine = match Engine::new(receiver) {
+        let engine = match Engine::new(command_sender, event_receiver) {
             Ok(engine) => engine,
             Err(error) => panic!("{}", error),
         };
 
         Self {
             _engine: engine,
-            game_status_sender: sender,
+            command_queue: command_receiver,
+            event_queue: event_sender,
         }
     }
 
@@ -34,14 +42,14 @@ impl EngineSingleton {
 
     #[export]
     fn on_game_status_running(&self, _owner: TRef<Node>) {
-        if self.game_status_sender.send(GameStatus::Running).is_err() {
+        if self.event_queue.send(Event::GameStarted).is_err() {
             // TODO: Log error
         }
     }
 
     #[export]
     fn on_game_status_stopped(&self, _owner: TRef<Node>) {
-        if self.game_status_sender.send(GameStatus::Stopped).is_err() {
+        if self.event_queue.send(Event::GameFinished).is_err() {
             // TODO: Log error
         }
     }
