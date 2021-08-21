@@ -2,21 +2,21 @@ use std::pin::Pin;
 
 use lunaria_api::lunaria::v1::start_game_response::GameStatus as ApiGameStatus;
 use lunaria_api::lunaria::v1::{StartGameRequest, StartGameResponse};
-use tokio::sync::watch::Receiver;
 use tokio_stream::wrappers::WatchStream;
 use tokio_stream::StreamExt;
 use tonic::codegen::futures_core::Stream;
 use tonic::{Request, Response, Status};
 
-use crate::game::GameStatus;
+use crate::engine::EventQueue;
+use crate::event::Event;
 
 pub struct GameService {
-    receiver: Receiver<GameStatus>,
+    event_queue: EventQueue,
 }
 
 impl GameService {
-    pub fn new(receiver: Receiver<GameStatus>) -> Self {
-        Self { receiver }
+    pub fn new(event_queue: EventQueue) -> Self {
+        Self { event_queue }
     }
 }
 
@@ -29,14 +29,14 @@ impl lunaria_api::lunaria::v1::game_service_server::GameService for GameService 
         &self,
         _request: Request<StartGameRequest>,
     ) -> Result<Response<Self::StartGameStream>, Status> {
-        let stream = WatchStream::new(self.receiver.clone()).map(|status| match status {
-            GameStatus::Loading => Ok(StartGameResponse {
-                status: ApiGameStatus::Loading.into(),
+        let stream = WatchStream::new(self.event_queue.clone()).map(|status| match status {
+            Event::None => Ok(StartGameResponse {
+                status: ApiGameStatus::Unspecified.into(),
             }),
-            GameStatus::Running => Ok(StartGameResponse {
+            Event::GameStarted => Ok(StartGameResponse {
                 status: ApiGameStatus::Running.into(),
             }),
-            GameStatus::Stopped => Ok(StartGameResponse {
+            Event::GameFinished => Ok(StartGameResponse {
                 status: ApiGameStatus::Stopped.into(),
             }),
         });

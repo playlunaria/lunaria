@@ -3,12 +3,11 @@ use std::str::FromStr;
 
 use lunaria_api::lunaria::v1::game_service_server::GameServiceServer;
 use lunaria_api::lunaria::v1::lunaria_service_server::LunariaServiceServer;
-use tokio::sync::watch::Receiver;
 use tonic::transport::Server as GrpcServer;
 
 use crate::api::game::GameService;
 use crate::api::lunaria::LunariaService;
-use crate::game::GameStatus;
+use crate::engine::{CommandQueue, EventQueue};
 
 const ENV_VAR_ADDRESS: &str = "LUNARIA_ADDRESS";
 
@@ -16,13 +15,16 @@ pub mod game;
 pub mod lunaria;
 
 pub struct Api {
-    game_status_receiver: Receiver<GameStatus>,
+    #[allow(dead_code)] // TODO: Remove when switching to synchronous start command
+    command_queue: CommandQueue,
+    event_queue: EventQueue,
 }
 
 impl Api {
-    pub fn new(game_status_receiver: Receiver<GameStatus>) -> Self {
+    pub fn new(command_queue: CommandQueue, event_queue: EventQueue) -> Self {
         Self {
-            game_status_receiver,
+            command_queue,
+            event_queue,
         }
     }
 
@@ -31,7 +33,7 @@ impl Api {
 
         GrpcServer::builder()
             .add_service(GameServiceServer::new(GameService::new(
-                self.game_status_receiver.clone(),
+                self.event_queue.clone(),
             )))
             .add_service(LunariaServiceServer::new(LunariaService::default()))
             .serve(address)
