@@ -7,7 +7,7 @@ use tonic::transport::Server as GrpcServer;
 
 use crate::api::game::GameService;
 use crate::api::lunaria::LunariaService;
-use crate::engine::{CommandQueue, EventQueue};
+use crate::engine::CommandQueue;
 
 const ENV_VAR_ADDRESS: &str = "LUNARIA_ADDRESS";
 
@@ -15,17 +15,12 @@ pub mod game;
 pub mod lunaria;
 
 pub struct Api {
-    #[allow(dead_code)] // TODO: Remove when switching to synchronous start command
     command_queue: CommandQueue,
-    event_queue: EventQueue,
 }
 
 impl Api {
-    pub fn new(command_queue: CommandQueue, event_queue: EventQueue) -> Self {
-        Self {
-            command_queue,
-            event_queue,
-        }
+    pub fn new(command_queue: CommandQueue) -> Self {
+        Self { command_queue }
     }
 
     pub async fn serve(self) -> Result<(), tonic::transport::Error> {
@@ -33,7 +28,7 @@ impl Api {
 
         GrpcServer::builder()
             .add_service(GameServiceServer::new(GameService::new(
-                self.event_queue.clone(),
+                self.command_queue.clone(),
             )))
             .add_service(LunariaServiceServer::new(LunariaService::default()))
             .serve(address)
