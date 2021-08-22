@@ -23,7 +23,7 @@ categories = [
 ]
 
 [dependencies]
-lunaria-api = { version = "0.2.0", features = ["server"] }
+lunaria-api = { version = "0.2.1", features = ["server"] }
 
 getset = "0.1.1"
 tokio = { version = "1.10.0", features = ["macros", "rt-multi-thread"] }

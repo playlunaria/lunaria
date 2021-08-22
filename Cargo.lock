@@ -546,9 +546,9 @@ dependencies = [
 
 [[package]]
 name = "lunaria-api"
-version = "0.2.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "67e45a069929ebcb8211788164d5ac8e013eda63b42e0c6c2b5ad54e9d502c9d"
+checksum = "a5cfc86d458d1dff5b40a8b6b46bb32e4569b1a747236ab6cbb8c12ff7dc748a"
 dependencies = [
  "prost",
  "tonic",
