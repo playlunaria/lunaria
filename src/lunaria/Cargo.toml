@@ -25,6 +25,7 @@ categories = [
 [dependencies]
 lunaria-api = { version = "0.2.1", features = ["server"] }
 
+bevy = "0.5.0"
 getset = "0.1.1"
 tokio = { version = "1.10.0", features = ["macros", "rt-multi-thread"] }
 tokio-stream = { version = "0.1.7", features = ["sync"] }

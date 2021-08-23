@@ -1,5 +1,0 @@
-[gd_resource type="GDNativeLibrary" format=2]
-
-[resource]
-entry/OSX.64 = "res://libraries/lunaria/liblunaria_godot.dylib"
-dependency/OSX.64 = [  ]
