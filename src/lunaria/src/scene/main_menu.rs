@@ -1,8 +1,9 @@
 use bevy::prelude::*;
 
 use crate::app::AppState;
+use crate::command::{Command, CommandReceiver};
+use crate::scene::BACKGROUND_COLOR;
 
-const BACKGROUND_COLOR: Color = Color::hsl(231.0, 0.15, 0.18);
 const TEXT_COLOR: Color = Color::WHITE;
 
 pub struct MainMenu;
@@ -10,11 +11,12 @@ pub struct MainMenu;
 impl Plugin for MainMenu {
     fn build(&self, app: &mut AppBuilder) {
         app.add_system_set(
-            SystemSet::on_enter(AppState::MainMenu).with_system(render_main_menu.system()),
+            SystemSet::on_enter(AppState::MainMenu).with_system(enter_main_menu.system()),
         )
         .add_system_set(
             SystemSet::on_exit(AppState::MainMenu).with_system(close_main_menu.system()),
-        );
+        )
+        .add_system(update_main_menu.system());
     }
 
     fn name(&self) -> &str {
@@ -22,7 +24,7 @@ impl Plugin for MainMenu {
     }
 }
 
-fn render_main_menu(
+fn enter_main_menu(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     mut materials: ResMut<Assets<ColorMaterial>>,
@@ -86,7 +88,24 @@ fn render_main_menu(
         });
 }
 
-fn close_main_menu() {}
+fn update_main_menu(
+    mut app_state: ResMut<State<AppState>>,
+    mut command_receiver: Local<CommandReceiver>,
+) {
+    while let Ok(command) = command_receiver.queue.try_recv() {
+        match command {
+            Command::StartGame => {
+                app_state.set(AppState::Game).unwrap();
+            }
+        }
+    }
+}
+
+fn close_main_menu(mut commands: Commands, mut entities: Query<Entity>) {
+    for entity in entities.iter_mut() {
+        commands.entity(entity).despawn();
+    }
+}
 
 fn padding(material: Handle<ColorMaterial>, width: Val, height: Val) -> NodeBundle {
     NodeBundle {
