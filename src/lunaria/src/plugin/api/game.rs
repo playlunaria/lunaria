@@ -1,15 +1,15 @@
 use lunaria_api::lunaria::v1::{StartGameRequest, StartGameResponse};
+use tokio::sync::broadcast::Sender;
 use tonic::{Request, Response, Status};
 
 use crate::command::Command;
-use crate::engine::CommandQueue;
 
 pub struct GameService {
-    command_queue: CommandQueue,
+    command_queue: Sender<Command>,
 }
 
 impl GameService {
-    pub fn new(command_queue: CommandQueue) -> Self {
+    pub fn new(command_queue: Sender<Command>) -> Self {
         Self { command_queue }
     }
 }
